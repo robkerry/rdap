@@ -37,6 +37,7 @@ type rawRegistry struct {
 }
 
 type cacheFile struct {
+	URL          string          `json:"url,omitempty"`
 	FetchedAt    time.Time       `json:"fetched_at"`
 	ExpiresAt    time.Time       `json:"expires_at"`
 	ETag         string          `json:"etag,omitempty"`
@@ -104,7 +105,7 @@ func (l *Loader) Load(ctx context.Context) (*Registry, error) {
 
 	var cached *cacheFile
 	if l.CachePath != "" {
-		if c, err := readCache(l.CachePath); err == nil {
+		if c, err := readCache(l.CachePath); err == nil && cacheURL(c) == l.URL {
 			cached = c
 			if !l.Refresh && time.Now().Before(c.ExpiresAt) && len(c.Body) > 0 {
 				return Parse(c.Body)
@@ -138,6 +139,7 @@ func (l *Loader) Load(ctx context.Context) (*Registry, error) {
 	defer resp.Body.Close()
 
 	if resp.StatusCode == http.StatusNotModified && cached != nil {
+		cached.URL = l.URL
 		cached.FetchedAt = time.Now()
 		cached.ExpiresAt = expiryFromHeaders(resp.Header, cached.FetchedAt)
 		_ = writeCache(l.CachePath, cached)
@@ -164,6 +166,7 @@ func (l *Loader) Load(ctx context.Context) (*Registry, error) {
 	if l.CachePath != "" {
 		now := time.Now()
 		_ = writeCache(l.CachePath, &cacheFile{
+			URL:          l.URL,
 			FetchedAt:    now,
 			ExpiresAt:    expiryFromHeaders(resp.Header, now),
 			ETag:         resp.Header.Get("ETag"),
@@ -219,6 +222,13 @@ func (r *Registry) URLsForDomain(domain string) ([]string, error) {
 	})
 
 	return urls, nil
+}
+
+func cacheURL(c *cacheFile) string {
+	if c == nil || c.URL == "" {
+		return DefaultURL
+	}
+	return c.URL
 }
 
 func expiryFromHeaders(h http.Header, now time.Time) time.Time {
