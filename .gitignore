@@ -1,0 +1,39 @@
+# Built binaries (Makefile writes ./rdap or ./rdap.exe)
+/rdap
+/rdap.exe
+
+# Release archives produced by CI or local packaging
+/dist/
+rdap_*.tar.gz
+rdap_*.zip
+SHA256SUMS
+
+# Compiled objects and shared libraries
+*.o
+*.a
+*.so
+*.dylib
+*.dll
+*.exe
+*.exe~
+
+# Test binaries and coverage
+*.test
+*.out
+coverage.html
+coverage.txt
+
+# Go workspace files (this repo is a single module)
+go.work
+go.work.sum
+
+# Temporary files from the bootstrap cache writer
+*.tmp
+
+# OS and editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*~
