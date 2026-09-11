@@ -47,8 +47,8 @@ https://github.com/robkerry/rdap/releases
 
 ```bash
 # macOS Apple Silicon example
-curl -fsSL -O https://github.com/robkerry/rdap/releases/latest/download/rdap_1.0.0_darwin_arm64.tar.gz
-tar -xzf rdap_1.0.0_darwin_arm64.tar.gz
+curl -fsSL -O https://github.com/robkerry/rdap/releases/latest/download/rdap_1.0.1_darwin_arm64.tar.gz
+tar -xzf rdap_1.0.1_darwin_arm64.tar.gz
 sudo install -m 0755 rdap /usr/local/bin/rdap
 ```
 

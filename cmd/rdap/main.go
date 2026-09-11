@@ -20,7 +20,7 @@ import (
 	rdapclient "github.com/robkerry/rdap/internal/rdap"
 )
 
-const version = "1.0.0"
+const version = "1.0.1"
 
 type config struct {
 	raw              bool
