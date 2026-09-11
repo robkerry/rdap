@@ -1,28 +1,28 @@
 class Rdap < Formula
   desc "Direct IANA-bootstrap RDAP command-line client"
   homepage "https://github.com/robkerry/rdap"
-  version "1.0.0"
+  version "1.0.1"
   license "MIT"
 
   on_macos do
     on_arm do
-      url "https://github.com/robkerry/rdap/releases/download/v1.0.0/rdap_1.0.0_darwin_arm64.tar.gz"
-      sha256 "fdfdd0d89231c0e5ba6bd9d8cd78fa80026d745efc0ba90b58ab6a6e0cea0e21"
+      url "https://github.com/robkerry/rdap/releases/download/v1.0.1/rdap_1.0.1_darwin_arm64.tar.gz"
+      sha256 "9fcb0813af773866a6f2456b1972eb14a9764ed79abc885cbfb5e06e23a36fbe"
     end
     on_intel do
-      url "https://github.com/robkerry/rdap/releases/download/v1.0.0/rdap_1.0.0_darwin_amd64.tar.gz"
-      sha256 "8ec5fd8550d8892254c7d7ce36a5db39a2f88af24b9516bbb5abae19c6c6a4e5"
+      url "https://github.com/robkerry/rdap/releases/download/v1.0.1/rdap_1.0.1_darwin_amd64.tar.gz"
+      sha256 "61bf886b4cf3a9ff802e2ae7362257733f2e53295aef757f921707b61cb1168c"
     end
   end
 
   on_linux do
     on_arm do
-      url "https://github.com/robkerry/rdap/releases/download/v1.0.0/rdap_1.0.0_linux_arm64.tar.gz"
-      sha256 "a03fb112266b8d7953c5ac4af01a6497bbad5c84217ed85833e22cbfc0d6bd68"
+      url "https://github.com/robkerry/rdap/releases/download/v1.0.1/rdap_1.0.1_linux_arm64.tar.gz"
+      sha256 "b3075ec90139ccce32ee9177a32a33e864d098ef3e0815a9c937933b354edc8c"
     end
     on_intel do
-      url "https://github.com/robkerry/rdap/releases/download/v1.0.0/rdap_1.0.0_linux_amd64.tar.gz"
-      sha256 "242ad04af26a6ade331052218646cb53d3e5067ccc7c7cb67509ded399187b1a"
+      url "https://github.com/robkerry/rdap/releases/download/v1.0.1/rdap_1.0.1_linux_amd64.tar.gz"
+      sha256 "5023776ba4de21fe8fb0d13be293a3d8a80a6754bde1c0bc82aa266130732f0a"
     end
   end
 
