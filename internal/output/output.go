@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	"rdapcli/internal/rdap"
+	"github.com/robkerry/rdap/internal/rdap"
 )
 
 type Printer struct {

@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	"rdapcli/internal/bootstrap"
+	"github.com/robkerry/rdap/internal/bootstrap"
 )
 
 func TestFollowsTopLevelRelatedRegistrarReferral(t *testing.T) {

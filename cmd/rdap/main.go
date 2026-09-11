@@ -15,9 +15,9 @@ import (
 	"strings"
 	"time"
 
-	"rdapcli/internal/bootstrap"
-	"rdapcli/internal/output"
-	rdapclient "rdapcli/internal/rdap"
+	"github.com/robkerry/rdap/internal/bootstrap"
+	"github.com/robkerry/rdap/internal/output"
+	rdapclient "github.com/robkerry/rdap/internal/rdap"
 )
 
 const version = "1.0.0"

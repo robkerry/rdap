@@ -13,7 +13,7 @@ import (
 	"strings"
 	"time"
 
-	"rdapcli/internal/bootstrap"
+	"github.com/robkerry/rdap/internal/bootstrap"
 )
 
 type Hop struct {

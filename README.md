@@ -14,6 +14,53 @@ Unlike clients that proxy lookups through a third-party service, `rdap`:
 The IANA bootstrap registry is cached using HTTP cache metadata / `Expires`
 where available, with a 24-hour fallback.
 
+## Install
+
+### Homebrew
+
+```bash
+brew install robkerry/rdap/rdap
+```
+
+### Install script (macOS / Linux)
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/robkerry/rdap/main/scripts/install.sh | bash
+```
+
+The script downloads the latest GitHub release, checks the SHA-256, and
+installs into `/usr/local/bin` if it is writable, otherwise `~/.local/bin`.
+Override the destination with `RDAP_INSTALL_DIR`.
+
+### Go
+
+Requires Go 1.22+.
+
+```bash
+go install github.com/robkerry/rdap/cmd/rdap@latest
+```
+
+### Manual download
+
+Release archives and `SHA256SUMS` are published at
+https://github.com/robkerry/rdap/releases
+
+```bash
+# macOS Apple Silicon example
+curl -fsSL -O https://github.com/robkerry/rdap/releases/latest/download/rdap_1.0.0_darwin_arm64.tar.gz
+tar -xzf rdap_1.0.0_darwin_arm64.tar.gz
+sudo install -m 0755 rdap /usr/local/bin/rdap
+```
+
+Windows users should download `rdap_*_windows_amd64.zip` or
+`rdap_*_windows_arm64.zip` and put `rdap.exe` on `PATH`.
+
+Then:
+
+```bash
+rdap example.co.uk
+```
+
 ## Build
 
 Requires Go 1.22+.
@@ -22,29 +69,6 @@ Requires Go 1.22+.
 go test ./...
 go build -o rdap ./cmd/rdap
 ```
-
-## Install
-
-### macOS / Linux
-
-```bash
-go build -o rdap ./cmd/rdap
-sudo install -m 0755 rdap /usr/local/bin/rdap
-```
-
-Then:
-
-```bash
-rdap example.co.uk
-```
-
-### Windows PowerShell
-
-```powershell
-go build -o rdap.exe ./cmd/rdap
-```
-
-Put `rdap.exe` in a directory on your `PATH`.
 
 ## Usage
 
@@ -152,7 +176,10 @@ produces archives for:
 - Windows x64 (`windows/amd64`)
 - Windows ARM64 (`windows/arm64`)
 
-The release workflow also generates SHA-256 checksums.
+The release workflow also generates SHA-256 checksums and attaches
+`scripts/install.sh`. After tagging a new version, update
+`Formula/rdap.rb` (version, URLs, and SHA-256s) in this repo and in
+https://github.com/robkerry/homebrew-rdap
 
 ## Licence
 
