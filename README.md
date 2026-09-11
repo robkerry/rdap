@@ -22,6 +22,13 @@ where available, with a 24-hour fallback.
 brew install robkerry/rdap/rdap
 ```
 
+### Scoop (Windows)
+
+```powershell
+scoop bucket add rdap https://github.com/robkerry/scoop-rdap
+scoop install rdap
+```
+
 ### Install script (macOS / Linux)
 
 ```bash
@@ -31,6 +38,16 @@ curl -fsSL https://raw.githubusercontent.com/robkerry/rdap/main/scripts/install.
 The script downloads the latest GitHub release, checks the SHA-256, and
 installs into `/usr/local/bin` if it is writable, otherwise `~/.local/bin`.
 Override the destination with `RDAP_INSTALL_DIR`.
+
+### Install script (Windows PowerShell)
+
+```powershell
+irm https://raw.githubusercontent.com/robkerry/rdap/main/scripts/install.ps1 | iex
+```
+
+The script downloads the latest GitHub release, checks the SHA-256, and
+installs into `%LOCALAPPDATA%\rdap`, then adds that directory to your user
+`PATH`. Override the destination with `$env:RDAP_INSTALL_DIR`.
 
 ### Go
 
@@ -52,8 +69,9 @@ tar -xzf rdap_1.0.1_darwin_arm64.tar.gz
 sudo install -m 0755 rdap /usr/local/bin/rdap
 ```
 
-Windows users should download `rdap_*_windows_amd64.zip` or
-`rdap_*_windows_arm64.zip` and put `rdap.exe` on `PATH`.
+Windows users who are not using Scoop or the install script should
+download `rdap_*_windows_amd64.zip` or `rdap_*_windows_arm64.zip` and put
+`rdap.exe` on `PATH`.
 
 Then:
 
@@ -177,9 +195,10 @@ produces archives for:
 - Windows ARM64 (`windows/arm64`)
 
 The release workflow also generates SHA-256 checksums and attaches
-`scripts/install.sh`. After tagging a new version, update
-`Formula/rdap.rb` (version, URLs, and SHA-256s) in this repo and in
-https://github.com/robkerry/homebrew-rdap
+`scripts/install.sh` and `scripts/install.ps1`. After tagging a new
+version, update `Formula/rdap.rb` and `scoop/rdap.json` in this repo,
+https://github.com/robkerry/homebrew-rdap, and
+https://github.com/robkerry/scoop-rdap.
 
 ## Licence
 

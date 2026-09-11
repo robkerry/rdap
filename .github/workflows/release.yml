@@ -92,6 +92,7 @@ jobs:
       - name: Checksums
         run: |
           cp scripts/install.sh dist/install.sh
+          cp scripts/install.ps1 dist/install.ps1
           cd dist
           sha256sum * > SHA256SUMS
 
