@@ -1,6 +1,96 @@
 # rdap
 
-A small cross-platform RDAP command-line client written in Go.
+Look up who registered a domain, when it expires, and which nameservers it
+uses. `rdap` asks the official registry directly, instead of going through a
+third-party website.
+
+After install:
+
+```bash
+rdap example.co.uk
+```
+
+## Install
+
+Pick your operating system. The first option is the easiest.
+
+### macOS
+
+1. **Homebrew**
+
+   ```bash
+   brew install robkerry/rdap/rdap
+   ```
+
+2. **Install script**
+
+   ```bash
+   curl -fsSL https://raw.githubusercontent.com/robkerry/rdap/main/scripts/install.sh | bash
+   ```
+
+3. **Download a release** from
+   https://github.com/robkerry/rdap/releases — choose the `darwin_arm64`
+   archive on Apple Silicon, or `darwin_amd64` on Intel. Extract it and move
+   `rdap` into a folder on your PATH, for example `/usr/local/bin`.
+
+4. **Go** (needs a Go toolchain)
+
+   ```bash
+   go install github.com/robkerry/rdap/cmd/rdap@latest
+   ```
+
+### Windows
+
+1. **Scoop**
+
+   ```powershell
+   scoop bucket add rdap https://github.com/robkerry/scoop-rdap
+   scoop install rdap
+   ```
+
+2. **Install script** (PowerShell)
+
+   ```powershell
+   irm https://raw.githubusercontent.com/robkerry/rdap/main/scripts/install.ps1 | iex
+   ```
+
+3. **Download a release** from
+   https://github.com/robkerry/rdap/releases — choose `windows_amd64` or
+   `windows_arm64`, extract the zip, and put `rdap.exe` on your PATH.
+
+4. **Go** (needs a Go toolchain)
+
+   ```powershell
+   go install github.com/robkerry/rdap/cmd/rdap@latest
+   ```
+
+### Linux
+
+1. **Install script**
+
+   ```bash
+   curl -fsSL https://raw.githubusercontent.com/robkerry/rdap/main/scripts/install.sh | bash
+   ```
+
+2. **Homebrew**
+
+   ```bash
+   brew install robkerry/rdap/rdap
+   ```
+
+3. **Download a release** from
+   https://github.com/robkerry/rdap/releases — choose `linux_amd64` or
+   `linux_arm64`. Extract it and move `rdap` into a folder on your PATH.
+
+4. **Go** (needs a Go toolchain)
+
+   ```bash
+   go install github.com/robkerry/rdap/cmd/rdap@latest
+   ```
+
+---
+
+## How it works
 
 Unlike clients that proxy lookups through a third-party service, `rdap`:
 
@@ -13,80 +103,6 @@ Unlike clients that proxy lookups through a third-party service, `rdap`:
 
 The IANA bootstrap registry is cached using HTTP cache metadata / `Expires`
 where available, with a 24-hour fallback.
-
-## Install
-
-### Homebrew
-
-```bash
-brew install robkerry/rdap/rdap
-```
-
-### Scoop (Windows)
-
-```powershell
-scoop bucket add rdap https://github.com/robkerry/scoop-rdap
-scoop install rdap
-```
-
-### Install script (macOS / Linux)
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/robkerry/rdap/main/scripts/install.sh | bash
-```
-
-The script downloads the latest GitHub release, checks the SHA-256, and
-installs into `/usr/local/bin` if it is writable, otherwise `~/.local/bin`.
-Override the destination with `RDAP_INSTALL_DIR`.
-
-### Install script (Windows PowerShell)
-
-```powershell
-irm https://raw.githubusercontent.com/robkerry/rdap/main/scripts/install.ps1 | iex
-```
-
-The script downloads the latest GitHub release, checks the SHA-256, and
-installs into `%LOCALAPPDATA%\rdap`, then adds that directory to your user
-`PATH`. Override the destination with `$env:RDAP_INSTALL_DIR`.
-
-### Go
-
-Requires Go 1.22+.
-
-```bash
-go install github.com/robkerry/rdap/cmd/rdap@latest
-```
-
-### Manual download
-
-Release archives and `SHA256SUMS` are published at
-https://github.com/robkerry/rdap/releases
-
-```bash
-# macOS Apple Silicon example
-curl -fsSL -O https://github.com/robkerry/rdap/releases/latest/download/rdap_1.0.1_darwin_arm64.tar.gz
-tar -xzf rdap_1.0.1_darwin_arm64.tar.gz
-sudo install -m 0755 rdap /usr/local/bin/rdap
-```
-
-Windows users who are not using Scoop or the install script should
-download `rdap_*_windows_amd64.zip` or `rdap_*_windows_arm64.zip` and put
-`rdap.exe` on `PATH`.
-
-Then:
-
-```bash
-rdap example.co.uk
-```
-
-## Build
-
-Requires Go 1.22+.
-
-```bash
-go test ./...
-go build -o rdap ./cmd/rdap
-```
 
 ## Usage
 
@@ -181,6 +197,23 @@ response.
 The binary deliberately has no third-party Go dependencies. Unicode IDN input
 therefore needs to be supplied as its IDNA A-label / punycode form, for
 example `xn--...`.
+
+## Install script details
+
+The install scripts download the latest GitHub release and check the
+SHA-256. On macOS and Linux they install into `/usr/local/bin` if it is
+writable, otherwise `~/.local/bin` (`RDAP_INSTALL_DIR` overrides this). On
+Windows the script installs into `%LOCALAPPDATA%\rdap` and adds that folder
+to your user PATH (`$env:RDAP_INSTALL_DIR` overrides this).
+
+## Build from source
+
+Requires Go 1.22+.
+
+```bash
+go test ./...
+go build -o rdap ./cmd/rdap
+```
 
 ## Release builds
 
